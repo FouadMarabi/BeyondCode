@@ -1,4 +1,4 @@
-﻿namespace SOLID._5_Dependency_Inversion_Principle__DIP_
+﻿namespace SOLID._5_Dependency_Inversion_Principle_DIP
 {
     namespace Problem
     {
@@ -13,7 +13,7 @@
         {
             public void LogIntoFile(Exception aException)
             {
-                FileLogger objFileLogger = new FileLogger();
+                var objFileLogger = new FileLogger();
                 objFileLogger.LogMessage(GetUserReadableMessage(aException));
             }
             private string GetUserReadableMessage(Exception ex)
@@ -57,12 +57,12 @@
             {
                 public void LogIntoFile(Exception aException)
                 {
-                    FileLogger objFileLogger = new FileLogger();
+                    var objFileLogger = new FileLogger();
                     objFileLogger.LogMessage(GetUserReadableMessage(aException));
                 }
                 public void LogIntoDataBase(Exception aException)
                 {
-                    DbLogger objDbLogger = new DbLogger();
+                    var objDbLogger = new DbLogger();
                     objDbLogger.LogMessage(GetUserReadableMessage(aException));
                 }
                 private string GetUserReadableMessage(Exception ex)
@@ -267,7 +267,7 @@
 
                         public ILogger GetLogger(Exception ex)
                         {
-                            var logger = _loggers.FirstOrDefault(l => l.GetType() == ex.GetType());
+                            ILogger? logger = _loggers.FirstOrDefault(l => l.GetType() == ex.GetType());
 
                             if (logger is null)
                             {

@@ -1,15 +1,20 @@
-﻿using SOLID.Single_Responsibility_Principle__SRP_.Problem;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
 using Microsoft.EntityFrameworkCore;
+using SOLID._1_SingleResponsibilityPrinciple_SRP.Problem;
 
-namespace SOLID.Single_Responsibility_Principle__SRP_
+namespace SOLID._1_SingleResponsibilityPrinciple_SRP
 {
     namespace Problem
     {
         public class UserService
         {
             private SmtpClient _smtpClient;
+
+            public UserService(SmtpClient smtpClient)
+            {
+                _smtpClient = smtpClient;
+            }
 
             public void Register(string email, string password)
             {
@@ -35,7 +40,7 @@ namespace SOLID.Single_Responsibility_Principle__SRP_
         {
             public User(string email, string password)
             {
-                throw new NotImplementedException();
+                
             }
         }
     }

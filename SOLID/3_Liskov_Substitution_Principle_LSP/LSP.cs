@@ -1,13 +1,11 @@
 ﻿using System.Text;
 
-namespace SOLID.Liskov_Substitution_Principle__LSP_
+namespace SOLID._3_Liskov_Substitution_Principle_LSP
 {
     namespace Problem
     {
         public class SqlFile
         {
-            public string FilePath { get; set; }
-            public string FileText { get; set; }
             public string LoadText()
             {
                 return "";
@@ -29,8 +27,8 @@ namespace SOLID.Liskov_Substitution_Principle__LSP_
 
             public string GetTextFromFiles()
             {
-                StringBuilder objStrBuilder = new StringBuilder();
-                foreach (var objFile in _sqlFiles)
+                var objStrBuilder = new StringBuilder();
+                foreach (SqlFile? objFile in _sqlFiles)
                 {
                     objStrBuilder.Append(objFile.LoadText());
                 }
@@ -38,7 +36,7 @@ namespace SOLID.Liskov_Substitution_Principle__LSP_
             }
             public void SaveTextIntoFiles()
             {
-                foreach (var objFile in _sqlFiles)
+                foreach (SqlFile? objFile in _sqlFiles)
                 {
                     objFile.SaveText();
                 }
@@ -54,11 +52,18 @@ namespace SOLID.Liskov_Substitution_Principle__LSP_
 
             public class SqlFileManager
             {
-                public List<SqlFile> lstSqlFiles { get; set; }
+                private List<SqlFile> lstSqlFiles { get; set; }
+
+                public SqlFileManager(List<SqlFile> lstSqlFiles)
+                {
+                    this.lstSqlFiles = lstSqlFiles;
+                }
+
+                
                 public string GetTextFromFiles()
                 {
-                    StringBuilder objStrBuilder = new StringBuilder();
-                    foreach (var objFile in lstSqlFiles)
+                    var objStrBuilder = new StringBuilder();
+                    foreach (SqlFile? objFile in lstSqlFiles)
                     {
                         objStrBuilder.Append(objFile.LoadText());
                     }
@@ -66,7 +71,7 @@ namespace SOLID.Liskov_Substitution_Principle__LSP_
                 }
                 public void SaveTextIntoFiles()
                 {
-                    foreach (var objFile in lstSqlFiles)
+                    foreach (SqlFile? objFile in lstSqlFiles)
                     {
                         //Check whether the current file object is read-only or not.If yes, skip calling it's
                         // SaveText() method to skip the exception.
@@ -95,8 +100,6 @@ namespace SOLID.Liskov_Substitution_Principle__LSP_
 
         public class SqlFile : IWritableSqlFile, IReadableSqlFile
         {
-            public string FilePath { get; set; }
-            public string FileText { get; set; }
             public string LoadText()
             {
                 return "";
@@ -111,8 +114,8 @@ namespace SOLID.Liskov_Substitution_Principle__LSP_
         {
             public string GetTextFromFiles(List<IReadableSqlFile> aLstReadableFiles)
             {
-                StringBuilder objStrBuilder = new StringBuilder();
-                foreach (var objFile in aLstReadableFiles)
+                var objStrBuilder = new StringBuilder();
+                foreach (IReadableSqlFile? objFile in aLstReadableFiles)
                 {
                     objStrBuilder.Append(objFile.LoadText());
                 }
@@ -120,7 +123,7 @@ namespace SOLID.Liskov_Substitution_Principle__LSP_
             }
             public void SaveTextIntoFiles(List<IWritableSqlFile> aLstWritableFiles)
             {
-                foreach (var objFile in aLstWritableFiles)
+                foreach (IWritableSqlFile? objFile in aLstWritableFiles)
                 {
                     objFile.SaveText();
                 }

@@ -1,4 +1,4 @@
-﻿namespace SOLID.Open_Closed_Principle__OCP_
+﻿namespace SOLID._2_Open_Closed_Principle_OCP
 {
     namespace Problem
     {
@@ -13,7 +13,7 @@
             public double TotalArea(Rectangle[] arrRectangles)
             {
                 double area = 0;
-                foreach (var objRectangle in arrRectangles)
+                foreach (Rectangle objRectangle in arrRectangles)
                 {
                     area += objRectangle.Height * objRectangle.Width;
                 }
@@ -34,7 +34,7 @@
                     double area = 0;
                     Rectangle objRectangle;
                     Circle objCircle;
-                    foreach (var obj in arrObjects)
+                    foreach (object obj in arrObjects)
                     {
                         if (obj is Rectangle)
                         {
@@ -84,7 +84,7 @@
             public double TotalArea(Shape[] arrShapes)
             {
                 double area = 0;
-                foreach (var objShape in arrShapes)
+                foreach (Shape objShape in arrShapes)
                 {
                     area += objShape.Area();
                 }

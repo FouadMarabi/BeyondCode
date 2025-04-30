@@ -1,4 +1,4 @@
-﻿namespace SOLID.Interface_Segregation_Principle__ISP_
+﻿namespace SOLID._4_Interface_Segregation_Principle_ISP
 {
     namespace Problem
     {
