@@ -5,6 +5,13 @@ using SOLID._1_SingleResponsibilityPrinciple_SRP.Problem;
 
 namespace SOLID._1_SingleResponsibilityPrinciple_SRP
 {
+    // there should never be more than one reason for a class to change. In other words, every class should have only one responsibility.
+
+    //Importance
+    //Maintainability: When classes have a single, well-defined responsibility, they're easier to understand and modify.
+    //Testability: It's easier to write unit tests for classes with a single focus.
+    //Flexibility: Changes to one responsibility don't affect unrelated parts of the system.
+
     namespace Problem
     {
         public class UserService

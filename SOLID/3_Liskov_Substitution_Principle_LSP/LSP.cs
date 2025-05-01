@@ -1,7 +1,16 @@
 ﻿using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SOLID._3_Liskov_Substitution_Principle_LSP
 {
+    //functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it.
+    // you should be able to use any derived class instead of a parent class and have it behave in the same manner without modification.
+
+    //Importance
+    //Polymorphism: Enables the use of polymorphic behavior, making code more flexible and reusable.
+    //Reliability: Ensures that subclasses adhere to the contract defined by the superclass.
+    //Predictability: Guarantees that replacing a superclass object with a subclass object won't break the program.
+
     namespace Problem
     {
         public class SqlFile

@@ -1,5 +1,11 @@
 ﻿namespace SOLID._5_Dependency_Inversion_Principle_DIP
 {
+    //  high-level modules/classes should not depend on low-level modules/classes. 
+
+    // Importance
+    // Loose coupling:Reduces dependencies between modules, making the code more flexible and easier to test.
+    // Flexibility: Enables changes to implementations without affecting clients.
+    // Maintainability: Makes code easier to understand and modify.
     namespace Problem
     {
         public class FileLogger
