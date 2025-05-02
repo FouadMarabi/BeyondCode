@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using SOLID._3_Liskov_Substitution_Principle_LSP.Solution;
+using System.Text;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SOLID._3_Liskov_Substitution_Principle_LSP
@@ -68,7 +69,7 @@ namespace SOLID._3_Liskov_Substitution_Principle_LSP
                     this.lstSqlFiles = lstSqlFiles;
                 }
 
-                
+
                 public string GetTextFromFiles()
                 {
                     var objStrBuilder = new StringBuilder();
@@ -85,6 +86,8 @@ namespace SOLID._3_Liskov_Substitution_Principle_LSP
                         //Check whether the current file object is read-only or not.If yes, skip calling it's
                         // SaveText() method to skip the exception.
 
+                        // The issue is fixed but ReadOnlySqlFile is violating LSP because it is not substitutable for SqlFile and throw exception in savetext
+                        // This also violate the OCP because if we add another file type we need to modify the code
                         if (objFile is not ReadOnlySqlFile)
                             objFile.SaveText();
                     }
@@ -92,7 +95,7 @@ namespace SOLID._3_Liskov_Substitution_Principle_LSP
             }
 
         }
-        
+
 
     }
 
@@ -105,6 +108,15 @@ namespace SOLID._3_Liskov_Substitution_Principle_LSP
         public interface IWritableSqlFile
         {
             void SaveText();
+        }
+
+
+        public class ReadOnlySqlFile : IReadableSqlFile
+        {
+            public string LoadText()
+            {
+                return "";
+            }
         }
 
         public class SqlFile : IWritableSqlFile, IReadableSqlFile
@@ -130,6 +142,7 @@ namespace SOLID._3_Liskov_Substitution_Principle_LSP
                 }
                 return objStrBuilder.ToString();
             }
+
             public void SaveTextIntoFiles(List<IWritableSqlFile> aLstWritableFiles)
             {
                 foreach (IWritableSqlFile? objFile in aLstWritableFiles)
@@ -137,6 +150,23 @@ namespace SOLID._3_Liskov_Substitution_Principle_LSP
                     objFile.SaveText();
                 }
             }
+        }
+    }
+
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            IReadableSqlFile readOnlyFile = new ReadOnlySqlFile();
+            IReadableSqlFile readOnlySqlFile = new SqlFile();
+            IWritableSqlFile writableSqlFile = new SqlFile();
+
+            var sqlFileManager = new SqlFileManager();
+            sqlFileManager.GetTextFromFiles(new List<IReadableSqlFile>()
+                { readOnlyFile, readOnlySqlFile }); // you cant pass in  writableSqlFile
+
+            sqlFileManager.SaveTextIntoFiles(new List<IWritableSqlFile>()
+                { writableSqlFile });
         }
     }
 }
